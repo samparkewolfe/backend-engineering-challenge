@@ -1,3 +1,6 @@
 .DS_Store
 __pycache__/
 dist/
+.tox
+*.egg-info
+junit-report.xml
