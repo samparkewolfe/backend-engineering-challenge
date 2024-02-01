@@ -4,12 +4,13 @@ from . import command
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_file", dest="filename", required=True, help="input file", metavar="FILE")
+    parser.add_argument("--input_file", dest="input_file", required=True, help="input file", metavar="FILE")
     return parser.parse_args()
 
 
 def dispatch(args):
-    command.handle_filename(args.filename)
+    if args.input_file:
+        command.handle_input_file(args.input_file)
 
 
 def main():

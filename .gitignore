@@ -4,3 +4,4 @@ dist/
 .tox
 *.egg-info
 junit-report.xml
+output_file.json

@@ -1,5 +1,23 @@
 from datetime import datetime, timedelta
 
+import json
+
+
+def handle_input_file(file_path):
+    events = []
+    with open(file_path, 'r') as file:
+        for line in file:
+            events.append(json.loads(line))
+    
+    if events:
+        averages = calculate_average_delivery_time(events)
+
+        with open("output_file.json", 'w') as file:
+            for line in averages:
+                print(line)
+                json.dump(line, file)
+                file.write('\n')
+
 
 def calculate_average_delivery_time(events):
     window_size = 10
