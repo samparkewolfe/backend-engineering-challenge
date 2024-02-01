@@ -3,14 +3,14 @@ from datetime import datetime, timedelta
 import json
 
 
-def handle_input_file(file_path):
+def handle_input_file_and_window_size(file_path, window_size):
     events = []
     with open(file_path, 'r') as file:
         for line in file:
             events.append(json.loads(line))
     
     if events:
-        averages = calculate_average_delivery_time(events)
+        averages = calculate_average_delivery_time(events, window_size)
 
         with open("output_file.json", 'w') as file:
             for line in averages:
@@ -19,8 +19,7 @@ def handle_input_file(file_path):
                 file.write('\n')
 
 
-def calculate_average_delivery_time(events):
-    window_size = 10
+def calculate_average_delivery_time(events, window_size):
 
     # Get the times of the first and last events
     first_event_time = parse_timestamp(events[0]["timestamp"]).replace(second=0, microsecond=0)
