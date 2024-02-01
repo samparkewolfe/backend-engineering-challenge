@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unbabel_cli"
+version = "0.1.0"
+description = "This is my project"
+readme = "README.md"
+
+[project.scripts]
+"unbabel_cli" = "unbabel_cli.cli:main"
+
+[tool.pytest.ini_options]
+addopts = "--color=yes --doctest-modules --junitxml=junit-report.xml --verbose"
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["tests"]
