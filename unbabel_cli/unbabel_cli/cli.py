@@ -1,12 +1,13 @@
+import sys
 import argparse
 
 from . import command
 
-def parse_arguments():
+def parse_arguments(args):
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_file", dest="input_file", required=True, help="input file", metavar="FILE")
     parser.add_argument("--window_size", dest="window_size", required=False, help="window size", type=int)
-    return parser.parse_args()
+    return parser.parse_args(args)
 
 
 def dispatch(args):
@@ -17,5 +18,5 @@ def dispatch(args):
 
 
 def main():
-    args = parse_arguments()
+    args = parse_arguments(sys.argv[1:])
     dispatch(args)
