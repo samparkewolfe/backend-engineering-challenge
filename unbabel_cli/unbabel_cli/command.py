@@ -6,17 +6,35 @@ import json
 def handle_input_file_and_window_size(file_path, window_size):
     events = []
     with open(file_path, 'r') as file:
-        for line in file:
-            events.append(json.loads(line))
+        events = parse_input_file(file)
     
     if events:
         averages = calculate_average_delivery_time(events, window_size)
 
-        with open("output_file.json", 'w') as file:
-            for line in averages:
-                print(line)
-                json.dump(line, file)
-                file.write('\n')
+    with open("output_file.json", 'w') as file:
+        text = create_output_text(averages)
+        print(text)
+        file.write(text)
+
+
+def parse_input_file(file):
+    """
+    Read the specific format of JSON required for this task
+    """
+    events = []
+    for line in file:
+        events.append(json.loads(line))
+    return events
+
+
+def create_output_text(averages):
+    """
+    Create text in specific format of output for this task
+    """
+    text = ""
+    for line in averages:
+        text = text + json.dumps(line) + '\n'
+    return text
 
 
 def calculate_average_delivery_time(events, window_size):
