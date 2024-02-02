@@ -131,3 +131,7 @@ def test_calculate_average_delivery_time_and_window_size():
     ]
 
     assert known_result == result
+
+def test_events_is_empty():
+    result = unbabel_cli.command.calculate_average_delivery_time([], 0)
+    assert not result

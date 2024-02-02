@@ -38,6 +38,8 @@ def create_output_text(averages):
 
 
 def calculate_average_delivery_time(events, window_size):
+    if not events:
+        return []
 
     # Get the times of the first and last events
     first_event_time = parse_timestamp(events[0]["timestamp"]).replace(second=0, microsecond=0)
