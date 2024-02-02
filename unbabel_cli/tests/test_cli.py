@@ -110,3 +110,14 @@ def test_window_size_wrong_type(mock_dispatch):
     result = shell("unbabel_cli --input_file example.json --window_size blahblahblah")
 
     assert "usage:" in result.stderr
+
+
+@patch("unbabel_cli.cli.dispatch")
+def test_input_file_not_json(mock_dispatch):
+    """
+    Does CLI abort w/o arguments, displaying usage instructions if input files is not a json file?
+    """
+    with ArgvContext("unbabel_cli", "--input_file", "example.txt"), pytest.raises(SystemExit):
+        unbabel_cli.cli.main()
+
+    assert not mock_dispatch.called, "CLI should stop execution"

@@ -3,10 +3,17 @@ import argparse
 
 from . import command
 
+
+def is_valid_json_file(arg):
+    if not arg.lower().endswith('.json'):
+        raise argparse.ArgumentTypeError(f"{arg} is not a JSON file.")
+    return arg
+
+
 def parse_arguments(args):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_file", dest="input_file", required=True, help="input file", metavar="FILE")
-    parser.add_argument("--window_size", dest="window_size", required=False, help="window size", type=int)
+    parser.add_argument("--input_file", dest="input_file", required=True, type=is_valid_json_file, help="Path to JSON file full of events", metavar="JSON_FILE")
+    parser.add_argument("--window_size", dest="window_size", required=False, type=int, help="Averaging window size of event durations in minutes", metavar="INT")
     return parser.parse_args(args)
 
 
